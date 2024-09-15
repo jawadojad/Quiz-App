@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual Environment
+venv/
+env/
+
+# Flask specific
+instance/
+*.sqlite3
+*.db
+*.log
+
+# Static file build output
+staticfiles/
+media/
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# VS Code settings
+.vscode/
+
+# JetBrains IDE settings
+.idea/
+
+# Mac OS specific files
+.DS_Store
+
+# Environment variables
+.env
+*.env
+
+# Postman environment and collections (optional)
+postman/collections/
+postman/environment/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
