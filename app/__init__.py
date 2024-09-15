@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 
 # Initialize extensions
 db = SQLAlchemy()
@@ -17,6 +18,7 @@ def create_app():
     # Initialize extensions with app
     db.init_app(app)
     jwt.init_app(app)
+    Migrate.init_app(app,db)
 
     from .routes import auth_bp
     app.register_blueprint(auth_bp)

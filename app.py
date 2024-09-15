@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate  # Import Migrate
 from flask_jwt_extended import JWTManager
 from flask_wtf.csrf import CSRFProtect
-from app.api_v1 import api_v1_bp
 from app.auth import auth_bp
+from app.api_v1 import api_v1_bp
 
 logging.basicConfig(level=logging.DEBUG)
 
