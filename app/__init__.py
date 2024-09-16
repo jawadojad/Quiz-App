@@ -12,7 +12,7 @@ csrf = CSRFProtect()
 def create_app():
     app = Flask(__name__)
     
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app/instance/users.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/users.db'
     app.config['SECRET_KEY'] = 'yoursecretkey'
     app.config['JWT_SECRET_KEY'] = 'yourjwtsecretkey'
     app.config['WTF_CSRF_SECRET_KEY'] = 'csrfsecretkey'
