@@ -1,26 +1,29 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
+from flask_wtf.csrf import CSRFProtect
 
-# Initialize extensions
 db = SQLAlchemy()
+migrate = Migrate()
 jwt = JWTManager()
+csrf = CSRFProtect()
 
 def create_app():
     app = Flask(__name__)
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app/instance/users.db'
+    app.config['SECRET_KEY'] = 'yoursecretkey'
+    app.config['JWT_SECRET_KEY'] = 'yourjwtsecretkey'
+    app.config['WTF_CSRF_SECRET_KEY'] = 'csrfsecretkey'
 
-    # Configurations
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/users.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_SECRET_KEY'] = 'super-secret-key'
-
-    # Initialize extensions with app
     db.init_app(app)
+    migrate.init_app(app, db)
     jwt.init_app(app)
-    Migrate.init_app(app,db)
-
-    from .routes import auth_bp
+    csrf.init_app(app)
+    
+    from app.routes import api_v1_bp, auth_bp
+    app.register_blueprint(api_v1_bp, url_prefix='/api/v1')
     app.register_blueprint(auth_bp)
 
     return app
