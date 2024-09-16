@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% block title %}Dashboard{% endblock %}
+
 {% block content %}
-<section class="welcome-section">
-    <h2>Welcome to Quiz-App!</h2>
-    <p>Your one-stop solution to learning and quizzes.</p>
-    <a href="{{ url_for('auth.register') }}" class="btn">Sign Up</a>
-    <a href="{{ url_for('auth.login') }}" class="btn">Login</a>
-</section>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="text-center">Welcome to Quiz App!</h2>
+        <a href="#" class="btn btn-success mt-3 w-100">Create a New Quiz</a>
+    </div>
+</div>
 {% endblock %}

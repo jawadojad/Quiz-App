@@ -24,13 +24,18 @@ class LoginForm(FlaskForm):
 def register_user():
     form = RegistrationForm()
     if form.validate_on_submit():
+        existing_user = User.query.filter_by(email=form.email.data).first()
+        if existing_user:
+            flash('This email is already registered. Please log in.', 'danger')
+            return redirect(url_for('auth.login_user'))
         hashed_password = generate_password_hash(form.password.data, method='pbkdf2:sha256')
         new_user = User(email=form.email.data, password=hashed_password, name="User")
         db.session.add(new_user)
         db.session.commit()
         flash('Registration successful! Please log in.', 'success')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.login_user'))
     return render_template('register.html', form=form)
+
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login_user():
